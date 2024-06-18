@@ -1,17 +1,26 @@
-import { logo } from "../assets";
+import { brain } from "../assets";
+import { github } from "../assets";
 
 const Hero = () => {
   return (
     <header className="w-full flex justify-center items-center flex-col">
       <nav className="flex justify-between items-center w-full mb-10 pt-3">
-        <img src={logo} alt="logo" className="w-28 object-contain" />
+        <div className="flex justify-between items-center gap-2">
+          <img
+            src={brain}
+            alt="logo"
+            width={48}
+            height={48}
+            className="object-contain"
+          />
+          <h1 className="font-satoshi font-semibold text-2xl">QuickSum</h1>
+        </div>
 
         <button
           type="button"
           onClick={() => window.open("https://github.com/maxdevocht")}
-          className="black_btn"
         >
-          Github
+          <img src={github} alt="github" width={48} height={48} />
         </button>
       </nav>
 
