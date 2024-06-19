@@ -9,18 +9,18 @@ const Hero = () => {
           <img
             src={brain}
             alt="logo"
-            width={48}
-            height={48}
+            width={40}
+            height={40}
             className="object-contain"
           />
-          <h1 className="font-satoshi font-semibold text-2xl">QuickSum</h1>
+          <h1 className="font-code font-bold text-2xl">QuickSum</h1>
         </div>
 
         <button
           type="button"
           onClick={() => window.open("https://github.com/maxdevocht")}
         >
-          <img src={github} alt="github" width={48} height={48} />
+          <img src={github} alt="github" width={40} height={40} />
         </button>
       </nav>
 
