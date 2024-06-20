@@ -5,5 +5,6 @@ import logo from "./logo.svg";
 import tick from "./tick.svg";
 import github from "./github.svg";
 import brain from "./brain.svg";
+import close from "./close.svg";
 
-export { linkIcon, loader, copy, logo, tick, github, brain };
+export { linkIcon, loader, copy, logo, tick, github, brain, close };

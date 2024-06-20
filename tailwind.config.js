@@ -8,6 +8,9 @@ export default {
         code: "var(--font-code)",
         grotesk: "var(--font-grotesk)",
       },
+      boxShadow: {
+        "custom-inset": "inset 10px -50px 94px 0 rgba(199, 199, 199, 0.2)",
+      },
     },
   },
   plugins: [],

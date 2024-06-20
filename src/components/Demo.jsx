@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-import { copy, loader, linkIcon, tick } from "../assets";
+import { copy, loader, linkIcon, tick, close } from "../assets";
 import { useLazyGetSummaryQuery } from "../services/article";
 
 const Demo = () => {
@@ -12,10 +12,8 @@ const Demo = () => {
   const [allArticles, setAllArticles] = useState([]);
   const [copied, setCopied] = useState("");
 
-  // RTK lazy query
   const [getSummary, { error, isFetching }] = useLazyGetSummaryQuery();
 
-  // Load data from localStorage on mount
   useEffect(() => {
     const articlesFromLocalStorage = JSON.parse(
       localStorage.getItem("articles")
@@ -59,6 +57,12 @@ const Demo = () => {
     }
   };
 
+  const handleDelete = (url) => {
+    const updatedArticles = allArticles.filter((item) => item.url !== url);
+    setAllArticles(updatedArticles);
+    localStorage.setItem("articles", JSON.stringify(updatedArticles));
+  };
+
   return (
     <section className="mt-16 w-full max-w-xl">
       {/* {search} */}
@@ -88,10 +92,11 @@ const Demo = () => {
             type="submit"
             className="submit_btn peer-focus:border-gray-700 peer-focus:text-gray-700"
           >
-            ↵
+            <p>↵</p>
           </button>
         </form>
 
+        {/* Browse History */}
         <div className="flex flex-col gap-1 max-h-60 overflow-y-auto">
           {allArticles.reverse().map((item, index) => (
             <div
@@ -103,12 +108,23 @@ const Demo = () => {
                 <img
                   src={copied === item.url ? tick : copy}
                   alt={copied === item.url ? "tick_icon" : "copy_icon"}
-                  className="w-[40%] h-[40%] object-contain"
+                  className="w-[70%] h-[70%] object-contain"
                 />
               </div>
               <p className="flex-1 font-sans text-blue-700 font-medium text-sm truncate">
                 {item.url}
               </p>
+              <div className="copy_btn">
+                <img
+                  src={close}
+                  alt="close_icon"
+                  className="w-[50%] h-[50%] object-contain"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleDelete(item.url);
+                  }}
+                />
+              </div>
             </div>
           ))}
         </div>
@@ -116,7 +132,7 @@ const Demo = () => {
 
       <div className="my-10 max-w-full flex justify-center items-center">
         {isFetching ? (
-          <img src={loader} alt="loader" className="w-20 h-20 object-contain" />
+          <img src={loader} alt="loader" className="w-12 h-12 object-contain" />
         ) : error ? (
           <p className="font-inter font-bold text-black text-center">
             Well, that wasn&apos;t supposed to happen...
@@ -129,10 +145,10 @@ const Demo = () => {
           article.summary && (
             <div className="flex flex-col gap-3">
               <h2 className="font-sans font-bold text-gray-600 text-xl">
-                Article <span className="blue_gradient">Summary</span>
+                Article <span className="orange_gradient">Summary</span>
               </h2>
               <div className="summary_box">
-                <p className="font-inter font-medium text-sm text-gray-700">
+                <p className="font-sans font-medium text-sm text-gray-700">
                   {article.summary}
                 </p>
               </div>
